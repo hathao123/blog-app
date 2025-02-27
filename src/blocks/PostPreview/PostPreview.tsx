@@ -1,33 +1,34 @@
-import {
-  Card,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import Link from "next/link";
 
 type Props = {
   id: number;
   title: string;
   body: string;
+  readTime: number;
+  date: string;
 };
 
-export default function Post({ id, title, body }: Props) {
+export default function Post({ id, title, body, readTime, date }: Props) {
   return (
-    <Card className="cursor-pointer col-span-1 place-items-stretch flex flex-col justify-between">
-      <CardHeader>
-        <CardTitle className="uppercase">{title}</CardTitle>
-        <CardDescription className="line-clamp-1">{body}</CardDescription>
-      </CardHeader>
-      <CardFooter>
+    <div className="flex flex-col col-span-1 place-items-stretch gap-2 py-5 md:py-10 md:flex-row md:gap-8 xl:gap-16">
+      <div className="flex flex-col w-[115px] gap-2">
+        <span className="font-medium">{readTime} Mins Read</span>
+        <span className="text-xs">{date}</span>
+      </div>
+      <div className="w-[366px] flex flex-col gap-3">
+        <span className="text-2xl font-bold font-[Lora] capitalize">
+          {title}
+        </span>
+        <span className="line-clamp-2 text-sm font-light">{body}</span>
+      </div>
+      <div className="w-[90px]">
         <Link
           href={`/posts/${id}`}
-          className="italic underline underline-offset-1"
+          className="underline underline-offset-1 text-sm"
         >
           Read more
         </Link>
-      </CardFooter>
-    </Card>
+      </div>
+    </div>
   );
 }

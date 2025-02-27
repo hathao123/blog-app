@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Lora, Noto_Sans } from "next/font/google";
 import "./globals.css";
+import { Footer, Header } from "@/blocks/Dashboard/components";
+import bg from "../../public/background.png";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const notoSans = Noto_Sans({
+  variable: "--font-noto-sans",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const lora = Lora({
+  variable: "--font-lora",
   subsets: ["latin"],
 });
 
@@ -25,11 +27,18 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased `}
+        style={{
+          backgroundImage: `url(${bg.src})`,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "100% 100%",
+        }}
+        className={`${notoSans.className} ${lora.variable} antialiased`}
       >
-        <div className="w-full 2xl:max-w-5xl md:max-w-xl max-w-sm mx-auto py-10">
+        <Header />
+        <div className="w-full xl:max-w-7xl md:max-w-xl max-w-sm mx-auto">
           {children}
         </div>
+        <Footer />
       </body>
     </html>
   );

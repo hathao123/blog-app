@@ -1,7 +1,9 @@
 import { API_URL } from "@/configs/api";
 import { notFound } from "next/navigation";
+import { randomDate } from "@/lib/utils";
+import moment from "moment";
 
-export const PAGE_SIZE = 12;
+export const PAGE_SIZE = 3;
 
 export async function getPosts(
   page: number
@@ -19,7 +21,17 @@ export async function getPosts(
   await new Promise((resolve) => setTimeout(resolve, 1000));
 
   return {
-    data: resut.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE),
+    data: resut
+      .slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE)
+      .map((item: Post) => {
+        return {
+          ...item,
+          date: moment(randomDate(new Date(2024, 6, 1), new Date())).format(
+            "DD MMM YY"
+          ),
+          readTime: Math.floor(Math.random() * (10 - 1 + 1) + 1),
+        };
+      }),
     totaCount: resut.length,
   };
 }
