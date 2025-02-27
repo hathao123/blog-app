@@ -17,7 +17,7 @@ type Props = {
 
 export default async function Post({ post, author, comments, error }: Props) {
   return (
-    <div className="h-screen xl:mb-20 md:mb-40 sm:mb-80 mb-96">
+    <div className="h-full mb-20">
       <div className="flex flex-row justify-center">
         <h1 className="capitalize my-4 text-center md:mt-16 font-[Lora] text-4xl font-bold text-balance">
           {post.title}
